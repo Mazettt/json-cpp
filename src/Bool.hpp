@@ -14,8 +14,6 @@ namespace jsoncpp
         Bool(Bool &&other);
         Bool &operator=(const Bool &other);
         Bool &operator=(Bool &&other);
-        virtual ijson &operator=(const ijson &other) override;
-        virtual ijson &operator=(ijson &&other) override;
         virtual ~Bool() = default;
 
         virtual std::string toString(int indent = -1) const override;

@@ -15,8 +15,6 @@ namespace jsoncpp
         Array(Array &&other);
         Array &operator=(const Array &other) = delete;
         Array &operator=(Array &&other);
-        virtual ijson &operator=(const ijson &other) override;
-        virtual ijson &operator=(ijson &&other) override;
         virtual ~Array() = default;
 
         virtual std::string toString(int indent = -1) const override;

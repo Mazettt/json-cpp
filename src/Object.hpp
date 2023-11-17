@@ -15,8 +15,6 @@ namespace jsoncpp
         Object(Object &&other);
         Object &operator=(const Object &other) = delete;
         Object &operator=(Object &&other);
-        virtual ijson &operator=(const ijson &other) override;
-        virtual ijson &operator=(ijson &&other) override;
         virtual ~Object() = default;
 
         virtual std::string toString(int indent = -1) const override;

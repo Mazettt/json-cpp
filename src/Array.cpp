@@ -50,19 +50,3 @@ std::string Array::toString(int indent) const
     result += "]";
     return result;
 }
-
-ijson &Array::operator=(const ijson &other)
-{
-    throw std::runtime_error("Cannot copy an array");
-}
-
-ijson &Array::operator=(ijson &&other)
-{
-    try {
-        Array &otherArray = dynamic_cast<Array &>(other);
-        _value = std::move(otherArray._value);
-    } catch (const std::bad_cast &e) {
-        throw std::runtime_error("Cannot assign a non-array value to an array");
-    }
-    return *this;
-}

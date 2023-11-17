@@ -14,8 +14,6 @@ namespace jsoncpp
         Int(Int &&other);
         Int &operator=(const Int &other);
         Int &operator=(Int &&other);
-        virtual ijson &operator=(const ijson &other) override;
-        virtual ijson &operator=(ijson &&other) override;
         virtual ~Int() = default;
 
         virtual std::string toString(int indent = -1) const override;

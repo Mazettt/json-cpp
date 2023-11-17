@@ -14,8 +14,6 @@ namespace jsoncpp
         Float(Float &&other);
         Float &operator=(const Float &other);
         Float &operator=(Float &&other);
-        virtual ijson &operator=(const ijson &other) override;
-        virtual ijson &operator=(ijson &&other) override;
         virtual ~Float() = default;
 
         virtual std::string toString(int indent = -1) const override;

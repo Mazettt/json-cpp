@@ -37,25 +37,3 @@ std::string String::toString(int indent) const
 {
     return "\"" + _value + "\"";
 }
-
-ijson &String::operator=(const ijson &other)
-{
-    try {
-        const String &otherString = dynamic_cast<const String &>(other);
-        _value = otherString._value;
-    } catch (const std::bad_cast &e) {
-        throw std::runtime_error("Cannot assign a non-string value to a string");
-    }
-    return *this;
-}
-
-ijson &String::operator=(ijson &&other)
-{
-    try {
-        String &otherString = dynamic_cast<String &>(other);
-        _value = std::move(otherString._value);
-    } catch (const std::bad_cast &e) {
-        throw std::runtime_error("Cannot assign a non-string value to a string");
-    }
-    return *this;
-}

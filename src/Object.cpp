@@ -31,19 +31,3 @@ std::string Object::toString(int indent) const
     result += "}";
     return result;
 }
-
-ijson &Object::operator=(const ijson &other)
-{
-    throw std::runtime_error("Cannot copy an object");
-}
-
-ijson &Object::operator=(ijson &&other)
-{
-    try {
-        Object &otherObject = dynamic_cast<Object &>(other);
-        _value = std::move(otherObject._value);
-    } catch (const std::bad_cast &e) {
-        throw std::runtime_error("Cannot assign a non-object value to an object");
-    }
-    return *this;
-}

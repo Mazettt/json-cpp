@@ -19,8 +19,6 @@ namespace jsoncpp
             std::string _msg;
         };
 
-        virtual ijson &operator=(const ijson &other) = 0;
-        virtual ijson &operator=(ijson &&other) = 0;
         virtual ~ijson() = default;
 
         virtual std::string toString(int indent = -1) const = 0;
@@ -89,14 +87,10 @@ namespace jsoncpp
     {
     public:
         jsonptr();
-        jsonptr(const jsonptr &other) = delete;
         jsonptr(jsonptr &&other);
         jsonptr(std::unique_ptr<ijson> &&other);
-        jsonptr &operator=(const jsonptr &other) = delete;
         jsonptr &operator=(jsonptr &&other);
         jsonptr &operator=(std::unique_ptr<ijson> &&other);
-        virtual ijson &operator=(const ijson &other) override { throw std::runtime_error("TODO"); }
-        virtual ijson &operator=(ijson &&other) override { throw std::runtime_error("TODO"); }
         virtual ~jsonptr() = default;
 
         virtual std::string toString(int indent = -1) const override { return _value->toString(indent); }
