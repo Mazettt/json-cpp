@@ -13,23 +13,22 @@ using namespace jsoncpp;
 
 int main(void)
 {
-    jsoncpp::Object o;
-    o["pi"] = make_json<jsoncpp::Float>(3.14159);
-    o["happy"] = make_json<jsoncpp::Bool>(true);
-    o["name"] = make_json<jsoncpp::String>(std::string("Niels"));
+    json j = make_json<jsoncpp::Object>();
+    j["pi"] = make_json<jsoncpp::Float>(3.14159);
+    j["happy"] = make_json<jsoncpp::Bool>(true);
+    j["name"] = make_json<jsoncpp::String>(std::string("Niels"));
     jsoncpp::Object answer;
     answer["everything"] = make_json<jsoncpp::Int>(42);
-    o["answer"] = make_json<jsoncpp::Object>(std::move(answer));
+    j["answer"] = make_json<jsoncpp::Object>(std::move(answer));
     jsoncpp::Array list;
-    list.getArray().push_back(make_json<jsoncpp::Int>(1));
-    list.getArray().push_back(make_json<jsoncpp::Int>(0));
-    list.getArray().push_back(make_json<jsoncpp::Int>(2));
-    o["list"] = make_json<jsoncpp::Array>(std::move(list));
+    list.push(make_json<jsoncpp::Int>(1));
+    list.push(make_json<jsoncpp::Int>(0));
+    list.push(make_json<jsoncpp::Int>(2));
+    j["list"] = make_json<jsoncpp::Array>(std::move(list));
     jsoncpp::Object object;
     object["currency"] = make_json<jsoncpp::String>(std::string("USD"));
     object["value"] = make_json<jsoncpp::Float>(42.99);
-    o["object"] = make_json<jsoncpp::Object>(std::move(object));
-    json j = make_json<jsoncpp::Object>(std::move(o));
-    std::cout << *j << std::endl;
+    j["object"] = make_json<jsoncpp::Object>(std::move(object));
+    std::cout << j << std::endl;
     return 0;
 }

@@ -26,7 +26,7 @@ std::string Object::toString(int indent) const
 {
     std::string result = "{";
     for (auto &value : _value) {
-        result += value.first + ": " + value.second->toString(indent) + ", ";
+        result += value.first + ": " + value.second.toString(indent) + ", ";
     }
     result += "}";
     return result;

@@ -44,7 +44,7 @@ std::string Array::toString(int indent) const
     std::string result = "[";
     for (auto &value : _value)
     {
-        result += value->toString(indent);
+        result += value.toString(indent);
         result += ",";
     }
     result += "]";

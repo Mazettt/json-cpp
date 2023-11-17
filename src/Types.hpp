@@ -6,7 +6,7 @@
 #include <vector>
 #include <map>
 
-#define JSON_TYPE std::unique_ptr<ijson>
+#define JSON_TYPE jsonptr
 #define JSON_BOOL bool
 #define JSON_INT int
 #define JSON_FLOAT float

@@ -4,10 +4,13 @@
 
 namespace jsoncpp
 {
+    class jsonptr;
+
     class ijson
     {
     public:
-        class Error: public std::exception {
+        class Error: public std::exception
+        {
         public:
             Error(const std::string &message);
             virtual const char *what() const noexcept override;
@@ -82,6 +85,70 @@ namespace jsoncpp
         // operator JSON_BOOL &() { return getBool(); }
     };
 
+    class jsonptr : public ijson
+    {
+    public:
+        jsonptr();
+        jsonptr(const jsonptr &other) = delete;
+        jsonptr(jsonptr &&other);
+        jsonptr(std::unique_ptr<ijson> &&other);
+        jsonptr &operator=(const jsonptr &other) = delete;
+        jsonptr &operator=(jsonptr &&other);
+        jsonptr &operator=(std::unique_ptr<ijson> &&other);
+        virtual ijson &operator=(const ijson &other) override { throw std::runtime_error("TODO"); }
+        virtual ijson &operator=(ijson &&other) override { throw std::runtime_error("TODO"); }
+        virtual ~jsonptr() = default;
+
+        virtual std::string toString(int indent = -1) const override { return _value->toString(indent); }
+
+        // array
+        virtual const JSON_TYPE &operator[](size_t index) const override { return (*_value)[index]; }
+        virtual JSON_TYPE &operator[](size_t index) override { return (*_value)[index]; }
+        virtual void push(JSON_TYPE &&value) override { _value->push(std::move(value)); }
+        virtual void insert(size_t index, JSON_TYPE &&value) override { _value->insert(index, std::move(value)); }
+        virtual void erase(size_t index) override { _value->erase(index); }
+        virtual const JSON_TYPE &at(size_t index) const override { return _value->at(index); }
+        virtual JSON_TYPE &at(size_t index) override { return _value->at(index); }
+        virtual const JSON_TYPE &front() const override { return _value->front(); }
+        virtual JSON_TYPE &front() override { return _value->front(); }
+        virtual const JSON_TYPE &back() const override { return _value->back(); }
+        virtual JSON_TYPE &back() override { return _value->back(); }
+
+        // object
+        virtual const JSON_TYPE &operator[](const std::string &key) const override { return (*_value)[key]; }
+        virtual JSON_TYPE &operator[](const std::string &key) override { return (*_value)[key]; }
+        virtual const JSON_TYPE &operator[](const char *key) const override { return (*_value)[key]; }
+        virtual JSON_TYPE &operator[](const char *key) override { return (*_value)[key]; }
+        virtual void insert(const std::string &key, JSON_TYPE &&value) override { _value->insert(key, std::move(value)); }
+        virtual bool contains(const std::string &key) const override { return _value->contains(key); }
+        virtual void erase(const std::string &key) override { _value->erase(key); }
+        virtual const JSON_TYPE &at(const std::string &key) const override { return _value->at(key); }
+        virtual JSON_TYPE &at(const std::string &key) override { return _value->at(key); }
+
+        // both array and object
+        virtual void clear() override { _value->clear(); }
+        virtual size_t size() const override { return _value->size(); }
+        virtual bool empty() const override { return _value->empty(); }
+
+        // conversion
+        virtual const JSON_ARRAY &getArray() const override { return _value->getArray(); }
+        virtual const JSON_OBJECT &getObject() const override { return _value->getObject(); }
+        virtual JSON_FLOAT getFloat() const override { return _value->getFloat(); }
+        virtual JSON_INT getInt() const override { return _value->getInt(); }
+        virtual JSON_STRING getString() const override { return _value->getString(); }
+        virtual JSON_BOOL getBool() const override { return _value->getBool(); }
+
+        virtual JSON_ARRAY &getArray() override { return _value->getArray(); }
+        virtual JSON_OBJECT &getObject() override { return _value->getObject(); }
+        virtual JSON_FLOAT &getFloat() override { return _value->getFloat(); }
+        virtual JSON_INT &getInt() override { return _value->getInt(); }
+        virtual JSON_STRING &getString() override { return _value->getString(); }
+        virtual JSON_BOOL &getBool() override { return _value->getBool(); }
+
+    private:
+        std::unique_ptr<ijson> _value;
+    };
 }
 
 std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &json);
+std::ostream &operator<<(std::ostream &os, const jsoncpp::jsonptr &json);

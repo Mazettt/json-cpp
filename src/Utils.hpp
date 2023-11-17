@@ -16,11 +16,17 @@
 #include "String.hpp"
 
 namespace jsoncpp {
-    using json = JSON_TYPE;
+    using json = jsonptr;
+
+    template<typename T>
+    json make_json()
+    {
+        return json(std::make_unique<T>());
+    }
 
     template<typename T>
     json make_json(T &&value)
     {
-        return std::make_unique<T>(std::forward<T>(value));
+        return json(std::make_unique<T>(std::forward<T>(value)));
     }
 }
