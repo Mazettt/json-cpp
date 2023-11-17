@@ -9,10 +9,11 @@ namespace jsoncpp
     {
     public:
         Array();
-        Array(const JSON_ARRAY &value);
-        Array(const Array &other);
+        Array(const JSON_ARRAY &value) = delete;
+        Array(JSON_ARRAY &&value);
+        Array(const Array &other) = delete;
         Array(Array &&other);
-        Array &operator=(const Array &other);
+        Array &operator=(const Array &other) = delete;
         Array &operator=(Array &&other);
         virtual ~Array() = default;
 

@@ -9,10 +9,11 @@ namespace jsoncpp
     {
     public:
         Object();
-        Object(const JSON_OBJECT &value);
-        Object(const Object &other);
+        Object(const JSON_OBJECT &value) = delete;
+        Object(JSON_OBJECT &&value);
+        Object(const Object &other) = delete;
         Object(Object &&other);
-        Object &operator=(const Object &other);
+        Object &operator=(const Object &other) = delete;
         Object &operator=(Object &&other);
         virtual ~Object() = default;
 

@@ -6,25 +6,14 @@ Object::Object()
 {
 }
 
-Object::Object(const JSON_OBJECT &value):
-    _value(value)
+Object::Object(JSON_OBJECT &&value):
+    _value(std::move(value))
 {
-}
-
-Object::Object(const Object &other)
-{
-    _value = other._value;
 }
 
 Object::Object(Object &&other)
 {
     _value = std::move(other._value);
-}
-
-Object &Object::operator=(const Object &other)
-{
-    _value = other._value;
-    return *this;
 }
 
 Object &Object::operator=(Object &&other)
@@ -45,13 +34,7 @@ std::string Object::toString(int indent) const
 
 ijson &Object::operator=(const ijson &other)
 {
-    try {
-        const Object &otherObject = dynamic_cast<const Object &>(other);
-        _value = otherObject._value;
-    } catch (const std::bad_cast &e) {
-        throw std::runtime_error("Cannot assign a non-object value to an object");
-    }
-    return *this;
+    throw std::runtime_error("Cannot copy an object");
 }
 
 ijson &Object::operator=(ijson &&other)

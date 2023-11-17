@@ -6,25 +6,14 @@ Array::Array()
 {
 }
 
-Array::Array(const JSON_ARRAY &value):
-    _value(value)
+Array::Array(JSON_ARRAY &&value):
+    _value(std::move(value))
 {
-}
-
-Array::Array(const Array &other)
-{
-    _value = other._value;
 }
 
 Array::Array(Array &&other)
 {
     _value = std::move(other._value);
-}
-
-Array &Array::operator=(const Array &other)
-{
-    _value = other._value;
-    return *this;
 }
 
 Array &Array::operator=(Array &&other)
@@ -64,13 +53,7 @@ std::string Array::toString(int indent) const
 
 ijson &Array::operator=(const ijson &other)
 {
-    try {
-        const Array &otherArray = dynamic_cast<const Array &>(other);
-        _value = otherArray._value;
-    } catch (const std::bad_cast &e) {
-        throw std::runtime_error("Cannot assign a non-array value to an array");
-    }
-    return *this;
+    throw std::runtime_error("Cannot copy an array");
 }
 
 ijson &Array::operator=(ijson &&other)
