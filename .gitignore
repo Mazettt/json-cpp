@@ -38,3 +38,5 @@ vgcore*
 /.vscode/
 /Main.cpp
 /json.hpp
+/test.cpp
+/tests/json_test
