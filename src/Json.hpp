@@ -16,19 +16,40 @@ namespace jsoncpp
             std::string _msg;
         };
 
-        virtual ~ijson() = default;
-        virtual std::string toString(int indent = -1) const = 0;
-
-        virtual const JSON_TYPE &operator[](const std::string &key) const = 0;
-        virtual const JSON_TYPE &operator[](const char *key) const = 0;
-        virtual const JSON_TYPE &operator[](size_t index) const = 0;
-
-        virtual JSON_TYPE &operator[](const std::string &key) = 0;
-        virtual JSON_TYPE &operator[](const char *key) = 0;
-        virtual JSON_TYPE &operator[](size_t index) = 0;
-
         virtual ijson &operator=(const ijson &other) = 0;
         virtual ijson &operator=(ijson &&other) = 0;
+        virtual ~ijson() = default;
+
+        virtual std::string toString(int indent = -1) const = 0;
+
+        // array
+        virtual const JSON_TYPE &operator[](size_t index) const = 0;
+        virtual JSON_TYPE &operator[](size_t index) = 0;
+        virtual void push(JSON_TYPE &&value) = 0;
+        virtual void insert(size_t index, JSON_TYPE &&value) = 0;
+        virtual void erase(size_t index) = 0;
+        virtual const JSON_TYPE &at(size_t index) const = 0;
+        virtual JSON_TYPE &at(size_t index) = 0;
+        virtual const JSON_TYPE &front() const = 0;
+        virtual JSON_TYPE &front() = 0;
+        virtual const JSON_TYPE &back() const = 0;
+        virtual JSON_TYPE &back() = 0;
+
+        // object
+        virtual const JSON_TYPE &operator[](const std::string &key) const = 0;
+        virtual JSON_TYPE &operator[](const std::string &key) = 0;
+        virtual const JSON_TYPE &operator[](const char *key) const = 0;
+        virtual JSON_TYPE &operator[](const char *key) = 0;
+        virtual void insert(const std::string &key, JSON_TYPE &&value) = 0;
+        virtual bool contains(const std::string &key) const = 0;
+        virtual void erase(const std::string &key) = 0;
+        virtual const JSON_TYPE &at(const std::string &key) const = 0;
+        virtual JSON_TYPE &at(const std::string &key) = 0;
+
+        // both array and object
+        virtual void clear() = 0;
+        virtual size_t size() const = 0;
+        virtual bool empty() const = 0;
 
         // conversion
         virtual const JSON_ARRAY &getArray() const = 0;
@@ -61,40 +82,6 @@ namespace jsoncpp
         // operator JSON_BOOL &() { return getBool(); }
     };
 
-    // template <typename T>
-    // class json
-    // {
-    // public:
-    //     json();
-    //     json(T &&value);
-    //     json(const json &other);
-    //     json(json &&other);
-    //     json &operator=(const json &other);
-    //     json &operator=(json &&other);
-    //     ~json();
-
-    //     std::string toString(int indent = -1) const;
-
-    //     json &operator[](const std::string &key);
-    //     json &operator[](const char *key);
-    //     json &operator[](size_t index);
-
-    //     json &operator=(const T &value);
-    //     json &operator=(T &&value);
-
-    //     T operator T() const;
-
-    // private:
-    //     std::string _key;
-    // };
 }
 
-// enum Type {
-//     number,
-//     string,
-//     boolean,
-//     array
-//     object,
-//     whitespace,
-//     null
-// };
+std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &json);

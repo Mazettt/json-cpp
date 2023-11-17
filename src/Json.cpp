@@ -10,3 +10,8 @@ ijson::Error::Error(const std::string &message):
 const char *ijson::Error::what() const noexcept {
     return _msg.c_str();
 }
+
+std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &json)
+{
+    return os << json.toString();
+}

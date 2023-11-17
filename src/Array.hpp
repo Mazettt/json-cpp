@@ -15,21 +15,42 @@ namespace jsoncpp
         Array(Array &&other);
         Array &operator=(const Array &other) = delete;
         Array &operator=(Array &&other);
+        virtual ijson &operator=(const ijson &other) override;
+        virtual ijson &operator=(ijson &&other) override;
         virtual ~Array() = default;
 
         virtual std::string toString(int indent = -1) const override;
 
-        virtual const JSON_TYPE &operator[](const std::string &key) const override { throw std::runtime_error("Cannot use string as array index"); }
-        virtual const JSON_TYPE &operator[](const char *key) const override { throw std::runtime_error("Cannot use string as array index"); }
+        // array
         virtual const JSON_TYPE &operator[](size_t index) const override { return _value[index]; }
-
-        virtual JSON_TYPE &operator[](const std::string &key) override { throw std::runtime_error("Cannot use string as array index"); }
-        virtual JSON_TYPE &operator[](const char *key) override { throw std::runtime_error("Cannot use string as array index"); }
         virtual JSON_TYPE &operator[](size_t index) override { return _value[index]; }
+        virtual void push(JSON_TYPE &&value) override { _value.push_back(std::move(value)); }
+        virtual void insert(size_t index, JSON_TYPE &&value) override { _value.insert(_value.begin() + index, std::move(value)); }
+        virtual void erase(size_t index) override { _value.erase(_value.begin() + index); }
+        virtual const JSON_TYPE &at(size_t index) const override { return _value.at(index); }
+        virtual JSON_TYPE &at(size_t index) override { return _value.at(index); }
+        virtual const JSON_TYPE &front() const override { return _value.front(); }
+        virtual JSON_TYPE &front() override { return _value.front(); }
+        virtual const JSON_TYPE &back() const override { return _value.back(); }
+        virtual JSON_TYPE &back() override { return _value.back(); }
 
-        virtual ijson &operator=(const ijson &other) override;
-        virtual ijson &operator=(ijson &&other) override;
+        // object
+        virtual const JSON_TYPE &operator[](const std::string &key) const override { throw std::runtime_error("Cannot use string as array index"); }
+        virtual JSON_TYPE &operator[](const std::string &key) override { throw std::runtime_error("Cannot use string as array index"); }
+        virtual const JSON_TYPE &operator[](const char *key) const override { throw std::runtime_error("Cannot use string as array index"); }
+        virtual JSON_TYPE &operator[](const char *key) override { throw std::runtime_error("Cannot use string as array index"); }
+        virtual void insert(const std::string &key, JSON_TYPE &&value) override { throw std::runtime_error("Cannot use insert() on array"); }
+        virtual bool contains(const std::string &key) const override { throw std::runtime_error("Cannot use contains() on array"); }
+        virtual void erase(const std::string &key) override { throw std::runtime_error("Cannot use erase() on array"); }
+        virtual const JSON_TYPE &at(const std::string &key) const override { throw std::runtime_error("Cannot use string as array index"); }
+        virtual JSON_TYPE &at(const std::string &key) override { throw std::runtime_error("Cannot use string as array index"); }
 
+        // both array and object
+        virtual void clear() override { _value.clear(); }
+        virtual size_t size() const override { return _value.size(); }
+        virtual bool empty() const override { return _value.empty(); }
+
+        // conversion
         virtual const JSON_ARRAY &getArray() const override { return _value; }
         virtual const JSON_OBJECT &getObject() const override { throw std::runtime_error("Cannot convert array to object"); }
         virtual JSON_FLOAT getFloat() const override { throw std::runtime_error("Cannot convert array to float"); }

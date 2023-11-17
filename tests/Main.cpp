@@ -30,6 +30,6 @@ int main(void)
     object["value"] = make_json<jsoncpp::Float>(42.99);
     o["object"] = make_json<jsoncpp::Object>(std::move(object));
     json j = make_json<jsoncpp::Object>(std::move(o));
-    std::cout << j->toString() << std::endl;
+    std::cout << *j << std::endl;
     return 0;
 }
