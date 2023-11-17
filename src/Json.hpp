@@ -5,6 +5,12 @@
 namespace jsoncpp
 {
     class jsonptr;
+    class Array;
+    class Object;
+    class Bool;
+    class Float;
+    class Int;
+    class String;
 
     class ijson
     {
@@ -87,10 +93,41 @@ namespace jsoncpp
     {
     public:
         jsonptr();
+
         jsonptr(jsonptr &&other);
         jsonptr(std::unique_ptr<ijson> &&other);
+
+        jsonptr(Array &&value);
+        jsonptr(Object &&value);
+        jsonptr(Bool &&value);
+        jsonptr(Float &&value);
+        jsonptr(Int &&value);
+        jsonptr(String &&value);
+        jsonptr(JSON_ARRAY &&value);
+        jsonptr(JSON_OBJECT &&value);
+        jsonptr(JSON_BOOL value);
+        jsonptr(JSON_FLOAT value);
+        jsonptr(JSON_INT value);
+        jsonptr(JSON_STRING value);
+        jsonptr(const char *value);
+
         jsonptr &operator=(jsonptr &&other);
         jsonptr &operator=(std::unique_ptr<ijson> &&other);
+
+        jsonptr &operator=(Array &&value);
+        jsonptr &operator=(Object &&value);
+        jsonptr &operator=(Bool &&value);
+        jsonptr &operator=(Float &&value);
+        jsonptr &operator=(Int &&value);
+        jsonptr &operator=(String &&value);
+        jsonptr &operator=(JSON_ARRAY &&value);
+        jsonptr &operator=(JSON_OBJECT &&value);
+        jsonptr &operator=(JSON_BOOL value);
+        jsonptr &operator=(JSON_FLOAT value);
+        jsonptr &operator=(JSON_INT value);
+        jsonptr &operator=(JSON_STRING value);
+        jsonptr &operator=(const char *value);
+
         virtual ~jsonptr() = default;
 
         virtual std::string toString(int indent = -1) const override { return _value->toString(indent); }
