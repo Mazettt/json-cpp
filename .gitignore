@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+logs/
+*.log
+**/build/
+vgcore*
+/.vscode/
+/Main.cpp
+/json.hpp
