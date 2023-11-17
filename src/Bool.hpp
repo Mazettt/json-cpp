@@ -18,13 +18,13 @@ namespace jsoncpp
 
         virtual std::string toString(int indent = -1) const override;
 
-        virtual const ijson &operator[](const std::string &key) const override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
-        virtual const ijson &operator[](const char *key) const override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
-        virtual const ijson &operator[](size_t index) const override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
+        virtual const JSON_TYPE &operator[](const std::string &key) const override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
+        virtual const JSON_TYPE &operator[](const char *key) const override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
+        virtual const JSON_TYPE &operator[](size_t index) const override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
 
-        virtual ijson &operator[](const std::string &key) override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
-        virtual ijson &operator[](const char *key) override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
-        virtual ijson &operator[](size_t index) override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
+        virtual JSON_TYPE &operator[](const std::string &key) override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
+        virtual JSON_TYPE &operator[](const char *key) override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
+        virtual JSON_TYPE &operator[](size_t index) override { throw std::runtime_error("Cannot use index operator in a non-iterable type"); }
 
         virtual ijson &operator=(const ijson &other) override;
         virtual ijson &operator=(ijson &&other) override;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "defines.hpp"
+#include "Types.hpp"
 
 namespace jsoncpp
 {
@@ -19,13 +19,13 @@ namespace jsoncpp
         virtual ~ijson() = default;
         virtual std::string toString(int indent = -1) const = 0;
 
-        virtual const ijson &operator[](const std::string &key) const = 0;
-        virtual const ijson &operator[](const char *key) const = 0;
-        virtual const ijson &operator[](size_t index) const = 0;
+        virtual const JSON_TYPE &operator[](const std::string &key) const = 0;
+        virtual const JSON_TYPE &operator[](const char *key) const = 0;
+        virtual const JSON_TYPE &operator[](size_t index) const = 0;
 
-        virtual ijson &operator[](const std::string &key) = 0;
-        virtual ijson &operator[](const char *key) = 0;
-        virtual ijson &operator[](size_t index) = 0;
+        virtual JSON_TYPE &operator[](const std::string &key) = 0;
+        virtual JSON_TYPE &operator[](const char *key) = 0;
+        virtual JSON_TYPE &operator[](size_t index) = 0;
 
         virtual ijson &operator=(const ijson &other) = 0;
         virtual ijson &operator=(ijson &&other) = 0;
