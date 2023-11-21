@@ -176,6 +176,13 @@ jsonptr &jsonptr::operator=(const char *value)
     return *this;
 }
 
+std::string jsonptr::toString(int indent, int __baseIndent) const
+{
+    if (indent > 0 && __baseIndent == 0)
+        __baseIndent = indent;
+    return _value->toString(indent, __baseIndent);
+}
+
 
 std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &json)
 {

@@ -22,30 +22,21 @@ Array &Array::operator=(Array &&other)
     return *this;
 }
 
-std::string Array::toString(int indent) const
+std::string Array::toString(int indent, int __baseIndent) const
 {
-    // std::string result = "[";
-    // if (indent >= 0)
-    //     result += "\n";
-    // for (int i = 0; i < _value.size(); i++)
-    // {
-    //     if (indent >= 0)
-    //         result += std::string(indent + 1, ' ');
-    //     result += _value[i]->toString(indent >= 0 ? indent + 1 : -1);
-    //     if (i != _value.size() - 1)
-    //         result += ",";
-    //     if (indent >= 0)
-    //         result += "\n";
-    // }
-    // if (indent >= 0)
-    //     result += std::string(indent, ' ');
-    // result += "]";
-    // return result;
     std::string result = "[";
-    for (auto &value : _value)
-    {
-        result += value.toString(indent);
-        result += ",";
+    for (auto it = _value.begin(); it != _value.end(); ++it) {
+        if (it != _value.begin())
+            result += ",";
+        if (indent > 0) {
+            result += "\n";
+            result += std::string(indent, ' ');
+        }
+        result += it->toString(indent + __baseIndent, __baseIndent);
+    }
+    if (indent > 0) {
+        result += "\n";
+        result += std::string(indent - __baseIndent, ' ');
     }
     result += "]";
     return result;

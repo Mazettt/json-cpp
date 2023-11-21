@@ -34,7 +34,7 @@ Int &Int::operator=(Int &&other)
     return *this;
 }
 
-std::string Int::toString(int indent) const
+std::string Int::toString(int indent, int __baseIndent) const
 {
     return std::to_string(_value);
 }

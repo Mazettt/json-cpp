@@ -33,7 +33,7 @@ String &String::operator=(String &&other)
     return *this;
 }
 
-std::string String::toString(int indent) const
+std::string String::toString(int indent, int __baseIndent) const
 {
     return "\"" + _value + "\"";
 }

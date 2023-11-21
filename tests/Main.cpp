@@ -30,6 +30,7 @@ int main(void)
     j["object"]["currency"] = "USD";
     j["object"]["value"] = 42.99f;
     std::cout << j << std::endl;
+    std::cout << j.toString(4) << std::endl;
 
     float pi = j["pi"];
     std::cout << pi << std::endl;

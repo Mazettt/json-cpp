@@ -16,7 +16,7 @@ namespace jsoncpp
         Float &operator=(Float &&other);
         virtual ~Float() = default;
 
-        virtual std::string toString(int indent = -1) const override;
+        virtual std::string toString(int indent = 0, int __baseIndent = 0) const override;
 
         // array
         virtual const JSON_TYPE &operator[](size_t index) const override { throw std::runtime_error("Cannot use operator[] on float"); }

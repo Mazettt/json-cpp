@@ -17,7 +17,7 @@ namespace jsoncpp
         Object &operator=(Object &&other);
         virtual ~Object() = default;
 
-        virtual std::string toString(int indent = -1) const override;
+        virtual std::string toString(int indent = 0, int __baseIndent = 0) const override;
 
         // array
         virtual const JSON_TYPE &operator[](size_t index) const override { throw std::runtime_error("Cannot use int as object key"); }

@@ -28,7 +28,7 @@ namespace jsoncpp
 
         virtual ~ijson() = default;
 
-        virtual std::string toString(int indent = -1) const = 0;
+        virtual std::string toString(int indent = 0, int __baseIndent = 0) const = 0;
 
         // array
         virtual const JSON_TYPE &operator[](size_t index) const = 0;
@@ -116,7 +116,7 @@ namespace jsoncpp
 
         virtual ~jsonptr() = default;
 
-        virtual std::string toString(int indent = -1) const override { return _value->toString(indent); }
+        virtual std::string toString(int indent = 0, int __baseIndent = 0) const override;
 
         // array
         virtual const JSON_TYPE &operator[](size_t index) const override { return (*_value)[index]; }

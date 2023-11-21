@@ -2,7 +2,7 @@
 
 using namespace jsoncpp;
 
-std::string Null::toString(int indent) const
+std::string Null::toString(int indent, int __baseIndent) const
 {
     return "null";
 }

@@ -22,11 +22,22 @@ Object &Object::operator=(Object &&other)
     return *this;
 }
 
-std::string Object::toString(int indent) const
+std::string Object::toString(int indent, int __baseIndent) const
 {
     std::string result = "{";
-    for (auto &value : _value) {
-        result += value.first + ": " + value.second.toString(indent) + ", ";
+    for (auto it = _value.begin(); it != _value.end(); ++it) {
+        if (it != _value.begin())
+            result += ",";
+        if (indent > 0) {
+            result += "\n";
+            result += std::string(indent, ' ');
+        }
+        result += "\"" + it->first + "\":" + (indent > 0 ? " " : "");
+        result += it->second.toString(indent + __baseIndent, __baseIndent);
+    }
+    if (indent > 0) {
+        result += "\n";
+        result += std::string(indent - __baseIndent, ' ');
     }
     result += "}";
     return result;

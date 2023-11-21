@@ -34,7 +34,7 @@ Float &Float::operator=(Float &&other)
     return *this;
 }
 
-std::string Float::toString(int indent) const
+std::string Float::toString(int indent, int __baseIndent) const
 {
     return std::to_string(_value);
 }

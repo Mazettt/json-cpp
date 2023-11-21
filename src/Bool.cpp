@@ -34,7 +34,7 @@ Bool &Bool::operator=(Bool &&other)
     return *this;
 }
 
-std::string Bool::toString(int indent) const
+std::string Bool::toString(int indent, int __baseIndent) const
 {
     return _value ? "true" : "false";
 }
