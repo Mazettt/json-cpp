@@ -17,18 +17,19 @@ int main(void)
     j["pi"] = 3.14159f;
     j["happy"] = true;
     j["name"] = "Niels";
-    json answer = make_json<jsoncpp::Object>();
-    answer["everything"] = 42;
-    j["answer"] = std::move(answer);
-    json list = make_json<jsoncpp::Array>();
-    list.push(1);
-    list.push(0);
-    list.push(2);
-    j["list"] = std::move(list);
-    json object = make_json<jsoncpp::Object>();
-    object["currency"] = "USD";
-    object["value"] = 42.99f;
-    j["object"] = std::move(object);
+    j["answer"] = make_json<jsoncpp::Object>();
+    j["answer"]["everything"] = 42;
+    j["list"] = make_json<jsoncpp::Array>();
+    j["list"].push(1);
+    j["list"].push(0);
+    j["list"].push(2);
+    j["object"] = make_json<jsoncpp::Object>();
+    j["object"]["currency"] = "USD";
+    j["object"]["value"] = 42.99f;
     std::cout << j << std::endl;
+
+    float pi = j["pi"];
+    std::cout << pi << std::endl;
+
     return 0;
 }

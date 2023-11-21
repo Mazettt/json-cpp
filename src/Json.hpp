@@ -72,21 +72,6 @@ namespace jsoncpp
         virtual JSON_INT &getInt() = 0;
         virtual JSON_STRING &getString() = 0;
         virtual JSON_BOOL &getBool() = 0;
-
-        //! a voir
-        // operator JSON_ARRAY () const { return getArray(); }
-        // operator JSON_OBJECT () const { return getObject(); }
-        // operator JSON_FLOAT () const { return getFloat(); }
-        // operator JSON_INT () const { return getInt(); }
-        // operator JSON_STRING () const { return getString(); }
-        // operator JSON_BOOL () const { return getBool(); }
-
-        // operator JSON_ARRAY &() { return getArray(); }
-        // operator JSON_OBJECT &() { return getObject(); }
-        // operator JSON_FLOAT &() { return getFloat(); }
-        // operator JSON_INT &() { return getInt(); }
-        // operator JSON_STRING &() { return getString(); }
-        // operator JSON_BOOL &() { return getBool(); }
     };
 
     class jsonptr : public ijson
@@ -175,6 +160,20 @@ namespace jsoncpp
         virtual JSON_INT &getInt() override { return _value->getInt(); }
         virtual JSON_STRING &getString() override { return _value->getString(); }
         virtual JSON_BOOL &getBool() override { return _value->getBool(); }
+
+        operator const JSON_ARRAY &() const { return getArray(); }
+        operator const JSON_OBJECT &() const { return getObject(); }
+        operator JSON_FLOAT() const { return getFloat(); }
+        operator JSON_INT() const { return getInt(); }
+        operator JSON_STRING() const { return getString(); }
+        operator JSON_BOOL() const { return getBool(); }
+
+        operator JSON_ARRAY &() { return getArray(); }
+        operator JSON_OBJECT &() { return getObject(); }
+        operator JSON_FLOAT &() { return getFloat(); }
+        operator JSON_INT &() { return getInt(); }
+        operator JSON_STRING &() { return getString(); }
+        operator JSON_BOOL &() { return getBool(); }
 
     private:
         std::unique_ptr<ijson> _value;
