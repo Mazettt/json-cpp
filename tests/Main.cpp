@@ -13,10 +13,13 @@ using namespace jsoncpp;
 
 int main(void)
 {
+    json a;
+    std::cout << a << std::endl;
     json j = make_json<jsoncpp::Object>();
     j["pi"] = 3.14159f;
     j["happy"] = true;
     j["name"] = "Niels";
+    j["nothing"] = nullptr;
     j["answer"] = make_json<jsoncpp::Object>();
     j["answer"]["everything"] = 42;
     j["list"] = make_json<jsoncpp::Array>();

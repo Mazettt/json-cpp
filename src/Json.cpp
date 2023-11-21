@@ -5,6 +5,7 @@
 #include "Float.hpp"
 #include "Int.hpp"
 #include "String.hpp"
+#include "Null.hpp"
 
 using namespace jsoncpp;
 
@@ -19,7 +20,7 @@ const char *ijson::Error::what() const noexcept {
 
 
 jsonptr::jsonptr():
-    _value(nullptr)
+    _value(std::make_unique<Null>())
 {}
 
 jsonptr::jsonptr(jsonptr &&other):
@@ -79,7 +80,7 @@ jsonptr::jsonptr(JSON_STRING value):
 {}
 
 jsonptr::jsonptr(const char *value):
-    _value(std::make_unique<String>(value))
+    _value(value == nullptr ? static_cast<std::unique_ptr<ijson>>(std::make_unique<Null>()) : std::make_unique<String>(value))
 {}
 
 jsonptr &jsonptr::operator=(jsonptr &&other)
@@ -168,7 +169,10 @@ jsonptr &jsonptr::operator=(JSON_STRING value)
 
 jsonptr &jsonptr::operator=(const char *value)
 {
-    _value = std::make_unique<String>(value);
+    if (value == nullptr)
+        _value = std::make_unique<Null>();
+    else
+        _value = std::make_unique<String>(value);
     return *this;
 }
 

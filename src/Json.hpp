@@ -11,6 +11,7 @@ namespace jsoncpp
     class Float;
     class Int;
     class String;
+    class Null;
 
     class ijson
     {
