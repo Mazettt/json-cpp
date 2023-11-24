@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../src/json-cpp.hpp"
+#include <json-cpp.hpp>
 
 using namespace jsoncpp;
 
