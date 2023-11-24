@@ -6,6 +6,7 @@
 #include "Int.hpp"
 #include "String.hpp"
 #include "Null.hpp"
+#include "Parser.hpp"
 
 using namespace jsoncpp;
 
@@ -181,6 +182,18 @@ std::string jsonptr::toString(int indent, int __baseIndent) const
     if (indent > 0 && __baseIndent == 0)
         __baseIndent = indent;
     return _value->toString(indent, __baseIndent);
+}
+
+jsonptr jsonptr::parse(const std::string &str)
+{
+    Parser parser(str);
+    return parser.parse();
+}
+
+jsonptr jsonptr::parse(std::ifstream &is)
+{
+    Parser parser(is);
+    return parser.parse();
 }
 
 

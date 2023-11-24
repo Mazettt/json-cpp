@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <fstream>
 #include "Types.hpp"
 
 namespace jsoncpp
@@ -175,6 +178,9 @@ namespace jsoncpp
         operator JSON_INT &() { return getInt(); }
         operator JSON_STRING &() { return getString(); }
         operator JSON_BOOL &() { return getBool(); }
+
+        static jsonptr parse(const std::string &json);
+        static jsonptr parse(std::ifstream &stream);
 
     private:
         std::unique_ptr<ijson> _value;
