@@ -1,18 +1,12 @@
 #include <iostream>
 
-#include "../src/Json.hpp"
-#include "../src/Array.hpp"
-#include "../src/Object.hpp"
-#include "../src/Float.hpp"
-#include "../src/Int.hpp"
-#include "../src/String.hpp"
-#include "../src/Bool.hpp"
-#include "../src/Utils.hpp"
+#include "../src/json-cpp.hpp"
 
 using namespace jsoncpp;
 
 int main(void)
 {
+    // parsing from file
     {
         std::ifstream stream("test.json");
         try {
@@ -23,6 +17,7 @@ int main(void)
         }
     }
 
+    // parsing from string
     {
         try {
             json test = json::parse(R"({"answer":{"everything":42},"happy":true,"list":[1,0,2],"name":"Nielsoui","nothing":null,"object":{"currency":"USD","value":42.990002},"pi":3.141590})");
@@ -32,21 +27,22 @@ int main(void)
         }
     }
 
+    // creation of new json object
     {
         json a;
         std::cout << a << std::endl;
-        json j = make_json<jsoncpp::Object>();
+        json j = Object();
         j["pi"] = 3.14159f;
         j["happy"] = true;
         j["name"] = "Niels";
         j["nothing"] = nullptr;
-        j["answer"] = make_json<jsoncpp::Object>();
+        j["answer"] = Object();
         j["answer"]["everything"] = 42;
-        j["list"] = make_json<jsoncpp::Array>();
+        j["list"] = Array();
         j["list"].push(1);
         j["list"].push(0);
         j["list"].push(2);
-        j["object"] = make_json<jsoncpp::Object>();
+        j["object"] = Object();
         j["object"]["currency"] = "USD";
         j["object"]["value"] = 42.99f;
         std::cout << j << std::endl;

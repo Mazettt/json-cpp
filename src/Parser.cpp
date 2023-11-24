@@ -25,7 +25,7 @@ Parser::Parser(std::ifstream &stream)
     }
 }
 
-jsonptr Parser::parse()
+json Parser::parse()
 {
     if (_index >= _str.size())
         throw Error(_line, _column, "unexpected end of file");

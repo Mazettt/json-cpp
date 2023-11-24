@@ -20,155 +20,155 @@ const char *ijson::Error::what() const noexcept {
 }
 
 
-jsonptr::jsonptr():
+json::json():
     _value(std::make_unique<Null>())
 {}
 
-jsonptr::jsonptr(jsonptr &&other):
+json::json(json &&other):
     _value(std::move(other._value))
 {}
 
-jsonptr::jsonptr(std::unique_ptr<ijson> &&value):
+json::json(std::unique_ptr<ijson> &&value):
     _value(std::move(value))
 {}
 
-jsonptr::jsonptr(Array &&value):
+json::json(Array &&value):
     _value(std::make_unique<Array>(std::move(value)))
 {}
 
-jsonptr::jsonptr(Object &&value):
+json::json(Object &&value):
     _value(std::make_unique<Object>(std::move(value)))
 {}
 
-jsonptr::jsonptr(Bool &&value):
+json::json(Bool &&value):
     _value(std::make_unique<Bool>(std::move(value)))
 {}
 
-jsonptr::jsonptr(Float &&value):
+json::json(Float &&value):
     _value(std::make_unique<Float>(std::move(value)))
 {}
 
-jsonptr::jsonptr(Int &&value):
+json::json(Int &&value):
     _value(std::make_unique<Int>(std::move(value)))
 {}
 
-jsonptr::jsonptr(String &&value):
+json::json(String &&value):
     _value(std::make_unique<String>(std::move(value)))
 {}
 
-jsonptr::jsonptr(JSON_ARRAY &&value):
+json::json(JSON_ARRAY &&value):
     _value(std::make_unique<Array>(std::move(value)))
 {}
 
-jsonptr::jsonptr(JSON_OBJECT &&value):
+json::json(JSON_OBJECT &&value):
     _value(std::make_unique<Object>(std::move(value)))
 {}
 
-jsonptr::jsonptr(JSON_BOOL value):
+json::json(JSON_BOOL value):
     _value(std::make_unique<Bool>(value))
 {}
 
-jsonptr::jsonptr(JSON_FLOAT value):
+json::json(JSON_FLOAT value):
     _value(std::make_unique<Float>(value))
 {}
 
-jsonptr::jsonptr(JSON_INT value):
+json::json(JSON_INT value):
     _value(std::make_unique<Int>(value))
 {}
 
-jsonptr::jsonptr(JSON_STRING value):
+json::json(JSON_STRING value):
     _value(std::make_unique<String>(value))
 {}
 
-jsonptr::jsonptr(const char *value):
+json::json(const char *value):
     _value(value == nullptr ? static_cast<std::unique_ptr<ijson>>(std::make_unique<Null>()) : std::make_unique<String>(value))
 {}
 
-jsonptr &jsonptr::operator=(jsonptr &&other)
+json &json::operator=(json &&other)
 {
     _value = std::move(other._value);
     return *this;
 }
 
-jsonptr &jsonptr::operator=(std::unique_ptr<ijson> &&value)
+json &json::operator=(std::unique_ptr<ijson> &&value)
 {
     _value = std::move(value);
     return *this;
 }
 
-jsonptr &jsonptr::operator=(Array &&value)
+json &json::operator=(Array &&value)
 {
     _value = std::make_unique<Array>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(Object &&value)
+json &json::operator=(Object &&value)
 {
     _value = std::make_unique<Object>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(Bool &&value)
+json &json::operator=(Bool &&value)
 {
     _value = std::make_unique<Bool>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(Float &&value)
+json &json::operator=(Float &&value)
 {
     _value = std::make_unique<Float>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(Int &&value)
+json &json::operator=(Int &&value)
 {
     _value = std::make_unique<Int>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(String &&value)
+json &json::operator=(String &&value)
 {
     _value = std::make_unique<String>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(JSON_ARRAY &&value)
+json &json::operator=(JSON_ARRAY &&value)
 {
     _value = std::make_unique<Array>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(JSON_OBJECT &&value)
+json &json::operator=(JSON_OBJECT &&value)
 {
     _value = std::make_unique<Object>(std::move(value));
     return *this;
 }
 
-jsonptr &jsonptr::operator=(JSON_BOOL value)
+json &json::operator=(JSON_BOOL value)
 {
     _value = std::make_unique<Bool>(value);
     return *this;
 }
 
-jsonptr &jsonptr::operator=(JSON_FLOAT value)
+json &json::operator=(JSON_FLOAT value)
 {
     _value = std::make_unique<Float>(value);
     return *this;
 }
 
-jsonptr &jsonptr::operator=(JSON_INT value)
+json &json::operator=(JSON_INT value)
 {
     _value = std::make_unique<Int>(value);
     return *this;
 }
 
-jsonptr &jsonptr::operator=(JSON_STRING value)
+json &json::operator=(JSON_STRING value)
 {
     _value = std::make_unique<String>(value);
     return *this;
 }
 
-jsonptr &jsonptr::operator=(const char *value)
+json &json::operator=(const char *value)
 {
     if (value == nullptr)
         _value = std::make_unique<Null>();
@@ -177,67 +177,67 @@ jsonptr &jsonptr::operator=(const char *value)
     return *this;
 }
 
-std::string jsonptr::toString(int indent, int __baseIndent) const
+std::string json::toString(int indent, int __baseIndent) const
 {
     if (indent > 0 && __baseIndent == 0)
         __baseIndent = indent;
     return _value->toString(indent, __baseIndent);
 }
 
-jsonptr::operator Array &()
+json::operator Array &()
 {
     return dynamic_cast<Array &>(*this->_value);
 }
 
-jsonptr::operator Object &()
+json::operator Object &()
 {
     return dynamic_cast<Object &>(*this->_value);
 }
 
-jsonptr::operator Bool &()
+json::operator Bool &()
 {
     return dynamic_cast<Bool &>(*this->_value);
 }
 
-jsonptr::operator Float &()
+json::operator Float &()
 {
     return dynamic_cast<Float &>(*this->_value);
 }
 
-jsonptr::operator Int &()
+json::operator Int &()
 {
     return dynamic_cast<Int &>(*this->_value);
 }
 
-jsonptr::operator String &()
+json::operator String &()
 {
     return dynamic_cast<String &>(*this->_value);
 }
 
-jsonptr::operator Null &()
+json::operator Null &()
 {
     return dynamic_cast<Null &>(*this->_value);
 }
 
-jsonptr jsonptr::parse(const std::string &str)
+json json::parse(const std::string &jsonStr)
 {
-    Parser parser(str);
+    Parser parser(jsonStr);
     return parser.parse();
 }
 
-jsonptr jsonptr::parse(std::ifstream &is)
+json json::parse(std::ifstream &is)
 {
     Parser parser(is);
     return parser.parse();
 }
 
 
-std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &json)
+std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &j)
 {
-    return os << json.toString();
+    return os << j.toString();
 }
 
-std::ostream &operator<<(std::ostream &os, const jsoncpp::jsonptr &json)
+std::ostream &operator<<(std::ostream &os, const jsoncpp::json &j)
 {
-    return os << json.toString();
+    return os << j.toString();
 }

@@ -23,7 +23,7 @@ namespace jsoncpp {
             Parser(std::ifstream &stream);
             ~Parser() = default;
 
-            jsonptr parse();
+            json parse();
 
         private:
             std::string _str;

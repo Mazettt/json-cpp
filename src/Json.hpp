@@ -7,7 +7,7 @@
 
 namespace jsoncpp
 {
-    class jsonptr;
+    class json;
     class Array;
     class Object;
     class Bool;
@@ -78,46 +78,46 @@ namespace jsoncpp
         virtual JSON_BOOL &getBool() = 0;
     };
 
-    class jsonptr : public ijson
+    class json : public ijson
     {
     public:
-        jsonptr();
+        json();
 
-        jsonptr(jsonptr &&other);
-        jsonptr(std::unique_ptr<ijson> &&other);
+        json(json &&other);
+        json(std::unique_ptr<ijson> &&other);
 
-        jsonptr(Array &&value);
-        jsonptr(Object &&value);
-        jsonptr(Bool &&value);
-        jsonptr(Float &&value);
-        jsonptr(Int &&value);
-        jsonptr(String &&value);
-        jsonptr(JSON_ARRAY &&value);
-        jsonptr(JSON_OBJECT &&value);
-        jsonptr(JSON_BOOL value);
-        jsonptr(JSON_FLOAT value);
-        jsonptr(JSON_INT value);
-        jsonptr(JSON_STRING value);
-        jsonptr(const char *value);
+        json(Array &&value);
+        json(Object &&value);
+        json(Bool &&value);
+        json(Float &&value);
+        json(Int &&value);
+        json(String &&value);
+        json(JSON_ARRAY &&value);
+        json(JSON_OBJECT &&value);
+        json(JSON_BOOL value);
+        json(JSON_FLOAT value);
+        json(JSON_INT value);
+        json(JSON_STRING value);
+        json(const char *value);
 
-        jsonptr &operator=(jsonptr &&other);
-        jsonptr &operator=(std::unique_ptr<ijson> &&other);
+        json &operator=(json &&other);
+        json &operator=(std::unique_ptr<ijson> &&other);
 
-        jsonptr &operator=(Array &&value);
-        jsonptr &operator=(Object &&value);
-        jsonptr &operator=(Bool &&value);
-        jsonptr &operator=(Float &&value);
-        jsonptr &operator=(Int &&value);
-        jsonptr &operator=(String &&value);
-        jsonptr &operator=(JSON_ARRAY &&value);
-        jsonptr &operator=(JSON_OBJECT &&value);
-        jsonptr &operator=(JSON_BOOL value);
-        jsonptr &operator=(JSON_FLOAT value);
-        jsonptr &operator=(JSON_INT value);
-        jsonptr &operator=(JSON_STRING value);
-        jsonptr &operator=(const char *value);
+        json &operator=(Array &&value);
+        json &operator=(Object &&value);
+        json &operator=(Bool &&value);
+        json &operator=(Float &&value);
+        json &operator=(Int &&value);
+        json &operator=(String &&value);
+        json &operator=(JSON_ARRAY &&value);
+        json &operator=(JSON_OBJECT &&value);
+        json &operator=(JSON_BOOL value);
+        json &operator=(JSON_FLOAT value);
+        json &operator=(JSON_INT value);
+        json &operator=(JSON_STRING value);
+        json &operator=(const char *value);
 
-        virtual ~jsonptr() = default;
+        virtual ~json() = default;
 
         const std::unique_ptr<ijson> &get() const { return _value; }
         std::unique_ptr<ijson> &get() { return _value; }
@@ -190,13 +190,13 @@ namespace jsoncpp
         operator String &();
         operator Null &();
 
-        static jsonptr parse(const std::string &json);
-        static jsonptr parse(std::ifstream &stream);
+        static json parse(const std::string &jsonStr);
+        static json parse(std::ifstream &stream);
 
     private:
         std::unique_ptr<ijson> _value;
     };
 }
 
-std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &json);
-std::ostream &operator<<(std::ostream &os, const jsoncpp::jsonptr &json);
+std::ostream &operator<<(std::ostream &os, const jsoncpp::ijson &j);
+std::ostream &operator<<(std::ostream &os, const jsoncpp::json &j);
