@@ -184,6 +184,41 @@ std::string jsonptr::toString(int indent, int __baseIndent) const
     return _value->toString(indent, __baseIndent);
 }
 
+jsonptr::operator Array &()
+{
+    return dynamic_cast<Array &>(*this->_value);
+}
+
+jsonptr::operator Object &()
+{
+    return dynamic_cast<Object &>(*this->_value);
+}
+
+jsonptr::operator Bool &()
+{
+    return dynamic_cast<Bool &>(*this->_value);
+}
+
+jsonptr::operator Float &()
+{
+    return dynamic_cast<Float &>(*this->_value);
+}
+
+jsonptr::operator Int &()
+{
+    return dynamic_cast<Int &>(*this->_value);
+}
+
+jsonptr::operator String &()
+{
+    return dynamic_cast<String &>(*this->_value);
+}
+
+jsonptr::operator Null &()
+{
+    return dynamic_cast<Null &>(*this->_value);
+}
+
 jsonptr jsonptr::parse(const std::string &str)
 {
     Parser parser(str);

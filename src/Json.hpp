@@ -119,6 +119,9 @@ namespace jsoncpp
 
         virtual ~jsonptr() = default;
 
+        const std::unique_ptr<ijson> &get() const { return _value; }
+        std::unique_ptr<ijson> &get() { return _value; }
+
         virtual std::string toString(int indent = 0, int __baseIndent = 0) const override;
 
         // array
@@ -178,6 +181,14 @@ namespace jsoncpp
         operator JSON_INT &() { return getInt(); }
         operator JSON_STRING &() { return getString(); }
         operator JSON_BOOL &() { return getBool(); }
+
+        operator Array &();
+        operator Object &();
+        operator Bool &();
+        operator Float &();
+        operator Int &();
+        operator String &();
+        operator Null &();
 
         static jsonptr parse(const std::string &json);
         static jsonptr parse(std::ifstream &stream);

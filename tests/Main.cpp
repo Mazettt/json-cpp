@@ -54,6 +54,9 @@ int main(void)
 
         float pi = j["pi"];
         std::cout << pi << std::endl;
+
+        Float pi2 = j["pi"];
+        std::cout << pi2 << std::endl;
     }
 
     return 0;
