@@ -6,7 +6,13 @@ A library to use JSON objects in C++
 
 A documentation is planned to be written, but for now, you can look at the `./tests/Main.cpp` file to see some examples on how to use the library.
 
-To compile the tests, you can run the following commands:
+To test the library, you can first navigate to the tests directory:
+
+```bash
+cd tests
+```
+
+Then, you can build the project with:
 
 ```bash
 mkdir build
@@ -16,7 +22,7 @@ make
 cd ..
 ```
 
-Then, you can run the tests with:
+Finally, you can run the tests with:
 
 ```bash
 ./build/my_app
