@@ -42,6 +42,8 @@ Finally, you can run the tests with:
 
 If you want to modify the tests to test your own code or view some examples, you can edit the `main.cpp` file.
 
+The CMakelists.txt file in the `tests/` directory is a great example of how to compile the library in your own project.
+
 ## Usage examples
 
 Here are some examples of how to use the library.
