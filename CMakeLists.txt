@@ -5,15 +5,15 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(SOURCES
-    src/Array.cpp
-    src/Bool.cpp
-    src/Float.cpp
-    src/Int.cpp
+    src/types/Array.cpp
+    src/types/Bool.cpp
+    src/types/Float.cpp
+    src/types/Int.cpp
+    src/types/Null.cpp
+    src/types/Object.cpp
+    src/types/String.cpp
     src/Json.cpp
-    src/Null.cpp
-    src/Object.cpp
     src/Parser.cpp
-    src/String.cpp
 )
 
 add_library(json SHARED ${SOURCES})

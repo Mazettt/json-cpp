@@ -1,11 +1,11 @@
 #include "Json.hpp"
-#include "Array.hpp"
-#include "Object.hpp"
-#include "Bool.hpp"
-#include "Float.hpp"
-#include "Int.hpp"
-#include "String.hpp"
-#include "Null.hpp"
+#include "types/Array.hpp"
+#include "types/Object.hpp"
+#include "types/Bool.hpp"
+#include "types/Float.hpp"
+#include "types/Int.hpp"
+#include "types/String.hpp"
+#include "types/Null.hpp"
 #include "Parser.hpp"
 
 using namespace jsoncpp;
