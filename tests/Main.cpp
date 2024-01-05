@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <json-cpp.hpp>
 
 using namespace jsoncpp;
@@ -53,6 +51,22 @@ int main(void)
 
         Float pi2 = j["pi"];
         std::cout << pi2 << std::endl;
+    }
+
+    // writing to a file
+    {
+        json test = json::parse(R"(
+            {
+                "key1": "value1",
+                "key2": "value2",
+                "key3": "value3"
+            }
+        )");
+        std::ofstream output1("test_write1.json");
+        output1 << test;
+        // or
+        std::ofstream output2("test_write2.json");
+        output2 << test.toString(4);
     }
 
     return 0;
